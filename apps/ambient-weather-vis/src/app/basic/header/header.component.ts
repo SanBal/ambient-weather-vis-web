@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router"
 
 @Component({
   selector: 'ambient-weather-vis-header',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+  public constructor(private readonly router: Router) {
+  }
+
+  public goToHome(): void {
+    this.router.navigate(['/']).then()
+  }
 }
