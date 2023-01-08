@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreviewComponent } from './preview/preview.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from "@angular/forms"
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
+    // ToDo need to be removed
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
