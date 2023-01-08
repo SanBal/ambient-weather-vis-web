@@ -3,11 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './basic/header/header.component';
-import { SharedModule } from "./shared/shared.module";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, PreviewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -16,5 +17,4 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
