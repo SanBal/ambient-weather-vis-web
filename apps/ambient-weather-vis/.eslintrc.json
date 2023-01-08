@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "ambientWeatherVisWeb",
+            "prefix": "ambientWeatherVis",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ambient-weather-vis-web",
+            "prefix": "ambient-weather-vis",
             "style": "kebab-case"
           }
         ]
