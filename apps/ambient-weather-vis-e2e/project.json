@@ -19,12 +19,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/ambient-weather-vis-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/ambient-weather-vis-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["ambient-weather-vis"]
+  "implicitDependencies": [
+    "ambient-weather-vis"
+  ]
 }
