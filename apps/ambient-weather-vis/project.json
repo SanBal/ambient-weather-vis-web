@@ -14,12 +14,12 @@
         "main": "apps/ambient-weather-vis/src/main.ts",
         "polyfills": "apps/ambient-weather-vis/src/polyfills.ts",
         "tsConfig": "apps/ambient-weather-vis/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
+        "inlineStyleLanguage": "sass",
         "assets": [
           "apps/ambient-weather-vis/src/favicon.ico",
           "apps/ambient-weather-vis/src/assets"
         ],
-        "styles": ["apps/ambient-weather-vis/src/styles.scss"],
+        "styles": ["apps/ambient-weather-vis/src/styles.sass"],
         "scripts": []
       },
       "configurations": {
