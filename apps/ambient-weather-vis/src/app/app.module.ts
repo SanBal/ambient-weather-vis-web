@@ -7,13 +7,17 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreviewComponent } from './preview/preview.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from "@angular/forms"
+import { ReactiveFormsModule } from '@angular/forms';
+import { WeatherVisualisationComponent } from './weather-visualisation/weather-visualisation.component';
+import { TemperatureVisualisationComponent } from './weather-visualisation/temperature-visualisation/temperature-visualisation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PreviewComponent
+    PreviewComponent,
+    WeatherVisualisationComponent,
+    TemperatureVisualisationComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,7 @@ import { ReactiveFormsModule } from "@angular/forms"
     SharedModule,
     AppRoutingModule,
     // ToDo need to be removed
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

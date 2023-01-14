@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router"
 
 @Component({
   selector: 'ambient-weather-vis-preview',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./preview.component.sass'],
 })
 export class PreviewComponent {
+
+  public constructor(private readonly router: Router) {
+  }
+
+  public goToVisualisation(visualisation: string): void {
+    this.router.navigate([`/${visualisation}`]).then()
+  }
 }
