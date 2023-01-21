@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeatherVisualisationComponent } from './weather-visualisation/weather-visualisation.component';
 import { TemperatureVisualisationComponent } from './weather-visualisation/temperature-visualisation/temperature-visualisation.component';
+import { WindSpeedVisualisationComponent } from './weather-visualisation/wind-speed-visualisation/wind-speed-visualisation.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TemperatureVisualisationComponent } from './weather-visualisation/tempe
     PreviewComponent,
     WeatherVisualisationComponent,
     TemperatureVisualisationComponent,
+    WindSpeedVisualisationComponent,
   ],
   imports: [
     BrowserModule,
