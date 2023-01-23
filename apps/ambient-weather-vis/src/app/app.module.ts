@@ -9,8 +9,13 @@ import { PreviewComponent } from './preview/preview.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeatherVisualisationComponent } from './weather-visualisation/weather-visualisation.component';
-import { TemperatureVisualisationComponent } from './weather-visualisation/temperature-visualisation/temperature-visualisation.component';
-import { WindSpeedVisualisationComponent } from './weather-visualisation/wind-speed-visualisation/wind-speed-visualisation.component';
+import {
+  TemperatureVisualisationComponent
+} from './weather-visualisation/temperature-visualisation/temperature-visualisation.component';
+import {
+  WindSpeedVisualisationComponent
+} from './weather-visualisation/wind-speed-visualisation/wind-speed-visualisation.component';
+import { InfoComponent } from './basic/info/info.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,7 @@ import { WindSpeedVisualisationComponent } from './weather-visualisation/wind-sp
     WeatherVisualisationComponent,
     TemperatureVisualisationComponent,
     WindSpeedVisualisationComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -32,4 +38,5 @@ import { WindSpeedVisualisationComponent } from './weather-visualisation/wind-sp
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from "@angular/router"
 
 @Component({
@@ -7,10 +7,17 @@ import { Router } from "@angular/router"
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+  @Output()
+  public infoClick = new EventEmitter()
+
   public constructor(private readonly router: Router) {
   }
 
   public goToHome(): void {
     this.router.navigate(['/']).then()
+  }
+
+  public showInfo(): void {
+    this.infoClick.emit()
   }
 }
