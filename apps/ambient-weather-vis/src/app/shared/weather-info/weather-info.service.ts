@@ -10,6 +10,8 @@ const GEO_COORDINATES_URL = (location: string) =>
 const INFO_URL = (latitude: string, longitude: string) =>
   `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
 
+type GeoCoordinates = { latitude: string, longitude: string, location: string }
+
 @Injectable()
 export class WeatherInfoService {
 
@@ -23,17 +25,23 @@ export class WeatherInfoService {
           return this.httpClient.get<any>(INFO_URL(coordinates.latitude, coordinates.longitude))
             .pipe(
               map(resp => resp.current_weather),
-              map(currWeather => ({temperature: currWeather.temperature, windSpeed: currWeather.windspeed}))
+              map(currWeather => (
+                {
+                  temperature: currWeather.temperature,
+                  windSpeed: currWeather.windspeed,
+                  location: coordinates.location
+                }
+              ))
             )
         })
       );
   }
 
-  private getGeoCoordinates(location: string): Observable<{ latitude: string, longitude: string }> {
+  private getGeoCoordinates(location: string): Observable<GeoCoordinates> {
     return this.httpClient.get<any[]>(GEO_COORDINATES_URL(location))
       .pipe(
         map(resp => resp[0]),
-        map(location => ({latitude: location.lat, longitude: location.lon}))
+        map(location => ({latitude: location.lat, longitude: location.lon, location: location['display_name']}))
       );
   }
 }
