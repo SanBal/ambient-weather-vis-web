@@ -14,9 +14,9 @@ export class WeatherVisualisationComponent implements OnInit {
   public ngOnInit(): void {
     this.weatherInfoFormControl
       .valueChanges
-      .subscribe(info => info && this.updateVisualisation(info))
+      .subscribe(info => this.updateVisualisation(info))
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
-  protected updateVisualisation(info: WeatherInfo): void {}
+  protected updateVisualisation(info: WeatherInfo | null): void {}
 }

@@ -16,7 +16,7 @@ export class WindSpeedVisualisationComponent extends WeatherVisualisationCompone
 
   private readonly startAngle = 0
   private readonly endAngle = 45
-  private windSpeed = 0
+  private windSpeed: number | null = 0
   private readonly rotationDuration = 2000
 
   public constructor() {
@@ -37,8 +37,8 @@ export class WindSpeedVisualisationComponent extends WeatherVisualisationCompone
     setTimeout(() => this.windSpeed && this.moveGears(), 500)
   }
 
-  protected override updateVisualisation(info: WeatherInfo): void {
-    this.windSpeed = info.windSpeed
+  protected override updateVisualisation(info: WeatherInfo | null): void {
+    this.windSpeed = info ? info.windSpeed : null
     this.moveGears()
   }
 
@@ -167,7 +167,7 @@ export class WindSpeedVisualisationComponent extends WeatherVisualisationCompone
   }
 
   private moveGears(): void {
-    if (this.windSpeed > 0) {
+    if (this.windSpeed && this.windSpeed > 0) {
       if (this.windSpeed <= 5) {
         this.stopGear(this.gears[1])
         this.stopGear(this.gears[2])

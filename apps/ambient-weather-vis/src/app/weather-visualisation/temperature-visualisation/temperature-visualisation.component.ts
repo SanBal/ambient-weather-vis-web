@@ -24,7 +24,7 @@ export class TemperatureVisualisationComponent extends WeatherVisualisationCompo
   private yAxisHeight = 0
 
   private bar: any
-  private currTemperature = 0
+  private currTemperature: number | null = 0
 
   private barHeightAnimationDurationScale = d3.scaleLinear()
     .domain([0, MAX_TEMPERATURE])
@@ -52,75 +52,86 @@ export class TemperatureVisualisationComponent extends WeatherVisualisationCompo
     this.visualiseCurrentTemperature()
   }
 
-  protected override updateVisualisation(info: WeatherInfo): void {
+  protected override updateVisualisation(info: WeatherInfo | null): void {
     const prevTemperature = this.bar.data()[0]
-    this.currTemperature = info.temperature
-    if (prevTemperature !== this.currTemperature) {
-      const startTemperature = this.currTemperature === 0 ? 0.1 : 0
-      if (prevTemperature === null) {
-        this.visualiseCurrentTemperature(true)
-      } else if (prevTemperature >= 0 && this.currTemperature >= 0) {
-        this.bar
-          .data([this.currTemperature])
-          .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
-          .attr('y', (temperature: number) => this.currTemperature === 0 ? this.yScale(startTemperature) : this.yScale(temperature))
-          .attr('height', (temperature: number) => this.yScale(0) - this.yScale(this.currTemperature === 0 ? startTemperature : temperature))
-          .attr('fill', this.colorScale(this.currTemperature))
-      } else if (prevTemperature <= 0 && this.currTemperature <= 0) {
-        this.bar
-          .data([this.currTemperature])
-          .attr('y', this.yScale(startTemperature))
-          .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
-          .attr('height', (temperature: number) => this.yScale(temperature) - this.yScale(startTemperature))
-          .attr('fill', this.colorScale(this.currTemperature))
-      } else {
-        if (prevTemperature <= 0 && this.currTemperature > 0) {
+    if (info) {
+      this.currTemperature = info.temperature
+      if (prevTemperature !== this.currTemperature) {
+        const startTemperature = this.currTemperature === 0 ? 0.1 : 0
+        if (prevTemperature === null) {
+          this.visualiseCurrentTemperature(true)
+        } else if (prevTemperature >= 0 && this.currTemperature >= 0) {
           this.bar
             .data([this.currTemperature])
-            .transition().duration(this.barHeightAnimationDurationScale(Math.abs(prevTemperature)))
-            .attr('y', this.yScale(startTemperature))
-            .attr('height', 0)
             .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
-            .attr('y', (temperature: number) => this.yScale(temperature))
-            .attr('height', (temperature: number) => this.yScale(startTemperature) - this.yScale(temperature))
+            .attr('y', (temperature: number) => this.currTemperature === 0 ? this.yScale(startTemperature) : this.yScale(temperature))
+            .attr('height', (temperature: number) => this.yScale(0) - this.yScale(this.currTemperature === 0 ? startTemperature : temperature))
             .attr('fill', this.colorScale(this.currTemperature))
-        } else {
+        } else if (prevTemperature <= 0 && this.currTemperature <= 0) {
           this.bar
             .data([this.currTemperature])
-            .transition().duration(this.barHeightAnimationDurationScale(prevTemperature))
             .attr('y', this.yScale(startTemperature))
-            .attr('height', 0)
             .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
             .attr('height', (temperature: number) => this.yScale(temperature) - this.yScale(startTemperature))
             .attr('fill', this.colorScale(this.currTemperature))
+        } else {
+          if (prevTemperature <= 0 && this.currTemperature > 0) {
+            this.bar
+              .data([this.currTemperature])
+              .transition().duration(this.barHeightAnimationDurationScale(Math.abs(prevTemperature)))
+              .attr('y', this.yScale(startTemperature))
+              .attr('height', 0)
+              .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
+              .attr('y', (temperature: number) => this.yScale(temperature))
+              .attr('height', (temperature: number) => this.yScale(startTemperature) - this.yScale(temperature))
+              .attr('fill', this.colorScale(this.currTemperature))
+          } else {
+            this.bar
+              .data([this.currTemperature])
+              .transition().duration(this.barHeightAnimationDurationScale(prevTemperature))
+              .attr('y', this.yScale(startTemperature))
+              .attr('height', 0)
+              .transition().duration(this.barHeightAnimationDurationScale(Math.abs(this.currTemperature - prevTemperature)))
+              .attr('height', (temperature: number) => this.yScale(temperature) - this.yScale(startTemperature))
+              .attr('fill', this.colorScale(this.currTemperature))
+          }
         }
       }
+    } else {
+      this.currTemperature = null
+      this.bar
+        .data([this.currTemperature])
+        .transition().duration(this.barHeightAnimationDurationScale(prevTemperature))
+        .attr('y', this.yScale(0))
+        .attr('height', 0)
     }
   }
 
   private visualiseCurrentTemperature(withAnimation = false): void {
     setTimeout(() => {
-      if (this.currTemperature > 0) {
-        this.bar
-          .data([this.currTemperature])
-          .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(this.currTemperature) : 0)
-          .attr('y', this.yScale(this.currTemperature))
-          .attr('height', (temperature: number) => this.yScale(0) - this.yScale(temperature))
-          .attr('fill', this.colorScale(this.currTemperature))
-      } else if (this.currTemperature < 0) {
-        this.bar
-          .data([this.currTemperature])
-          .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(Math.abs(this.currTemperature)) : 0)
-          .attr('y', this.yScale(0))
-          .attr('height', (temperature: number) => this.yScale(temperature) - this.yScale(0))
-          .attr('fill', this.colorScale(this.currTemperature))
-      } else {
-        this.bar
-          .data([0])
-          .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(0) : 0)
-          .attr('y', this.yScale(0.1))
-          .attr('height', this.yScale(0) - this.yScale(0.1))
-          .attr('fill', this.colorScale(0))
+      if (this.currTemperature) {
+        if (this.currTemperature > 0) {
+          this.bar
+            .data([this.currTemperature])
+            .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(this.currTemperature) : 0)
+            .attr('y', this.yScale(this.currTemperature))
+            .attr('height', (temperature: number) => this.yScale(0) - this.yScale(temperature))
+            .attr('fill', this.colorScale(this.currTemperature))
+        } else if (this.currTemperature < 0) {
+          this.bar
+            .data([this.currTemperature])
+            .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(Math.abs(this.currTemperature)) : 0)
+            .attr('y', this.yScale(0))
+            .attr('height', (temperature: number) => this.yScale(temperature) - this.yScale(0))
+            .attr('fill', this.colorScale(this.currTemperature))
+        } else {
+          this.bar
+            .data([0])
+            .transition().duration(withAnimation ? this.barHeightAnimationDurationScale(0) : 0)
+            .attr('y', this.yScale(0.1))
+            .attr('height', this.yScale(0) - this.yScale(0.1))
+            .attr('fill', this.colorScale(0))
+        }
       }
     })
   }

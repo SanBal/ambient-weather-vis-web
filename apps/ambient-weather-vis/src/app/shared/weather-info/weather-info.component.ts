@@ -20,18 +20,18 @@ import { MatSnackBar } from "@angular/material/snack-bar"
 export class WeatherInfoComponent implements ControlValueAccessor {
   @Input() public question = ''
   public locationFormControl = new FormControl<string>("",
-      {
-        validators: [Validators.required],
-        nonNullable: true
-      })
+    {
+      validators: [Validators.required],
+      nonNullable: true
+    })
 
-  private onChange: ((info: WeatherInfo) => void) | undefined
+  private onChange: ((info: WeatherInfo | null) => void) | undefined
 
   public constructor(private readonly service: WeatherInfoService,
                      private readonly snackBar: MatSnackBar) {
   }
 
-  public registerOnChange(fn: (info: WeatherInfo) => void): void {
+  public registerOnChange(fn: (info: WeatherInfo | null) => void): void {
     this.onChange = fn;
   }
 
@@ -51,7 +51,14 @@ export class WeatherInfoComponent implements ControlValueAccessor {
       .pipe(first())
       .subscribe({
         next: info => this.onChange && this.onChange(info),
-        error: () => this.snackBar.open(`No weather info available for "${location}"`, 'Ok')
+        error: () => {
+          this.snackBar.open(
+            `No weather info available for "${location}"`,
+            'Ok',
+            { duration: 5000 }
+          )
+          this.onChange && this.onChange(null)
+        }
       })
   }
 }
