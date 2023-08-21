@@ -5,7 +5,7 @@ import { map, mergeMap, Observable } from "rxjs"
 import { WeatherInfo } from "./weather-info"
 
 const GEO_COORDINATES_URL = (location: string) =>
-  `https://nominatim.openstreetmap.org/search/${location}?format=json&limit=1`;
+  `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${location}`;
 
 const INFO_URL = (latitude: string, longitude: string) =>
   `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
