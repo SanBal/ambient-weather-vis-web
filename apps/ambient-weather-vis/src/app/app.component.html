@@ -1,1 +1,10 @@
-<ambient-weather-vis-web-nx-welcome></ambient-weather-vis-web-nx-welcome>
+<ambient-weather-vis-header (infoClick)="drawer.toggle()"></ambient-weather-vis-header>
+<mat-drawer-container class="drawer-container" [hasBackdrop]="false">
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+  <mat-drawer #drawer mode="over"
+              position="end">
+    <ambient-weather-vis-info></ambient-weather-vis-info>
+  </mat-drawer>
+</mat-drawer-container>

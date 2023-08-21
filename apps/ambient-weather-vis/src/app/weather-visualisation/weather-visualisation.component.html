@@ -1,0 +1,9 @@
+<div [ngStyle]="{'height': '100%'}" class="container">
+  <div [ngStyle]="{'height': '10%'}">
+    <ambient-weather-vis-weather-info [question]="question"
+                                      [formControl]="weatherInfoFormControl">
+    </ambient-weather-vis-weather-info>
+  </div>
+  <label class="location">{{weatherInfo ? weatherInfo.location : '&nbsp;'}}</label>
+  <div id="visualisation" [ngStyle]="{'height': '90%', 'width': ' 100%'}"></div>
+</div>

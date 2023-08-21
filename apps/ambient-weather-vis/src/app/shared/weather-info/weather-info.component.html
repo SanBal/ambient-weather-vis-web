@@ -1,0 +1,12 @@
+<span>
+  {{question}}
+  <mat-form-field>
+  <input matInput placeholder="Location" [formControl]="locationFormControl"/>
+</mat-form-field>?
+  <button mat-icon-button
+          [disabled]="!locationFormControl.valid"
+          (click)="onSearch()"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</span>

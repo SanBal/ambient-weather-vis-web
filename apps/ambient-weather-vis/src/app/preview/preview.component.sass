@@ -1,0 +1,67 @@
+.visualizations
+  margin-top: 5%
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 1em
+
+.second-row
+  display: flex
+  flex-direction: row
+  gap: 3em
+
+.visualization
+  border: 2px dashed darkslategrey
+  width: 200px
+  height: 200px
+  border-radius: 100px
+  position: relative
+
+img
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  margin: auto
+
+.thermometer
+  height: 180px
+
+.wind-speed
+  height: 125px
+
+.coming-soon
+  position: absolute
+  top: 3.5em
+  left: 1.25em
+  right: 0
+  bottom: 0
+  margin: auto
+  color: #673ab7
+
+@media screen and (max-width: 460px)
+  .second-row
+    flex-direction: column
+    gap: 1em
+  .visualization
+    width: 150px
+    height: 150px
+  .thermometer
+    height: 130px
+  .wind-speed
+    height: 80px
+  .coming-soon
+    font-size: larger
+
+@media screen and (max-width: 200px)
+  .visualization
+    width: 100px
+    height: 100px
+  .thermometer
+    height: 80px
+  .wind-speed
+    height: 50px
+  .coming-soon
+    font-size: smaller
